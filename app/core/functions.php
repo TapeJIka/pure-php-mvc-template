@@ -12,3 +12,7 @@ function validation($str){
     $str = htmlspecialchars($str);
     return $str;
 }
+function redirect($path) {
+    header("Location: " . ROOT."/".$path);
+    die;
+}

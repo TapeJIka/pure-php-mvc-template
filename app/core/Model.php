@@ -41,8 +41,7 @@ trait Model {
     //SQL query to get first row from table model->first(['where row' => value,'where row' => value], [where not => value,'where row' => value])
     public function first($data, $data_not = []) {
         $result = $this->where($data, $data_not);
-
-        if (isset($result)) {
+        if (isset($result[0])) {
             return $result[0];
         }
         return false;
@@ -50,10 +49,10 @@ trait Model {
     //SQL query to create object model->insert(['row' => value])
     public function insert ($data) {
         //Checks for allowed data, and removes unwanted data
-        if(!empty($this->allowedColums))
+        if(!empty($this->allowedColumns))
         {
             foreach ($data as $key) {
-                if (!in_array($key, $this->allowedColums())){
+                if (!in_array($key, $this->allowedColumns)){
                     unset($data[$key]);
                 }
             }
@@ -71,7 +70,7 @@ trait Model {
     //SQL query to update object
     public function update ($id, $id_column = 'id', $data) {
         //Checks for allowed data, and removes unwanted data
-        if(!empty($this->allowedColums))
+        if(!empty($this->allowedColumns))
         {
             foreach ($data as $key) {
                 if (!in_array($key, $this->allowedColums())){
